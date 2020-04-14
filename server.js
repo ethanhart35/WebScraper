@@ -1,5 +1,6 @@
 var express = require("express");
 var mongoose = require("mongoose");
+
 var exphbs  = require('express-handlebars');
 var bodyParser = require("body-parser");
 // Our scraping tools
@@ -71,10 +72,14 @@ app.get("/articles", function(req, res){
     .then(function(dbArticle){
 
         var articleobj={
-            temp:dbArticle
+            temp:dbArticle.map(function(document){
+                return{
+                    title: document.title
+                }
+            })
         }
         console.log(articleobj);
-        res.render("index", articleobj);
+        res.render("index", {articleobj: articleobj.temp});
     }).catch(function(err){
         res.json(err);
     });
