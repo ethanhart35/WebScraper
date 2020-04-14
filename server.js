@@ -7,6 +7,7 @@ var exphbs  = require('express-handlebars');
 var axios = require("axios");
 var cheerio = require("cheerio");
 
+
 var db = require("./models");
 
 var PORT = 3000;
@@ -47,6 +48,9 @@ app.get("/scrape", function(req,res){
         });
         res.send("Scrape Complete");
     });
+});
+app.get("/", function(req, res){
+   res.send("homepage");
 });
 
 app.get("/articles", function(req, res){
