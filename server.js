@@ -72,14 +72,15 @@ app.get("/articles", function(req, res){
     .then(function(dbArticle){
 
         var articleobj={
-            temp:dbArticle.map(function(document){
+            dbArticle: dbArticle.map(function(document){
                 return{
-                    title: document.title
+                    title: document.title,
+                    link: document.link
                 }
             })
         }
         console.log(articleobj);
-        res.render("index", {articleobj: articleobj.temp});
+        res.render("index", {articleobj: articleobj.dbArticle});
     }).catch(function(err){
         res.json(err);
     });
